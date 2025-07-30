@@ -8,16 +8,16 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # 複製專案文件
-COPY ["QuestPdfApi.csproj", "./"]
-RUN dotnet restore "QuestPdfApi.csproj"
+COPY ["QuestPdfApi/QuestPdfApi.csproj", "QuestPdfApi/"]
+RUN dotnet restore "QuestPdfApi/QuestPdfApi.csproj"
 
 # 複製所有源代碼
 COPY . .
-RUN dotnet build "QuestPdfApi.csproj" -c Release -o /app/build
+RUN dotnet build "QuestPdfApi/QuestPdfApi.csproj" -c Release -o /app/build
 
 # 發布
 FROM build AS publish
-RUN dotnet publish "QuestPdfApi.csproj" -c Release -o /app/publish
+RUN dotnet publish "QuestPdfApi/QuestPdfApi.csproj" -c Release -o /app/publish
 
 # 最終映像
 FROM base AS final

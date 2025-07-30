@@ -38,21 +38,22 @@
    - 選擇您的 Resumecraft 倉庫
 
 2. **配置設置**
-   - **Root Directory**: `QuestPdfApi`
-   - **Build Command**: `dotnet restore && dotnet build -c Release && dotnet publish -c Release -o ./publish`
+   - **Builder**: Dockerfile
+   - **Dockerfile Path**: QuestPdfApi/Dockerfile.railway
    - **Start Command**: `dotnet QuestPdfApi.dll --urls http://0.0.0.0:$PORT`
 
 3. **環境變數**
    ```
    ASPNETCORE_ENVIRONMENT=Production
    ASPNETCORE_URLS=http://0.0.0.0:$PORT
+   PORT=8080
    ```
 
 ### 步驟 4：推送代碼
 
 ```bash
 git add .
-git commit -m "Fix GitHub Actions warnings and setup Railway deployment"
+git commit -m "Fix Docker build issues and update Railway configuration"
 git push origin master
 ```
 

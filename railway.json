@@ -1,9 +1,8 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "builder": "NIXPACKS",
-    "rootDirectory": "QuestPdfApi",
-    "buildCommand": "dotnet restore && dotnet build -c Release && dotnet publish -c Release -o ./publish"
+    "builder": "DOCKERFILE",
+    "dockerfilePath": "QuestPdfApi/Dockerfile.railway"
   },
   "deploy": {
     "startCommand": "dotnet QuestPdfApi.dll --urls http://0.0.0.0:$PORT",
