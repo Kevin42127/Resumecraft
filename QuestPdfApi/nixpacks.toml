@@ -9,4 +9,8 @@ cmds = [
 ]
 
 [start]
-cmd = "dotnet QuestPdfApi.dll --urls http://0.0.0.0:$PORT" 
+cmd = "dotnet QuestPdfApi.dll --urls http://0.0.0.0:$PORT"
+
+[variables]
+ASPNETCORE_ENVIRONMENT = "Production"
+ASPNETCORE_URLS = "http://0.0.0.0:$PORT" 

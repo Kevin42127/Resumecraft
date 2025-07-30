@@ -1,0 +1,15 @@
+# 忽略所有 Dockerfile 文件
+Dockerfile*
+*.dockerfile
+
+# 忽略建置輸出
+bin/
+obj/
+publish/
+
+# 忽略日誌文件
+*.log
+
+# 忽略環境變數文件
+.env
+.env.local 
