@@ -44,7 +44,7 @@ function ColorTestPageContent() {
                   onClick={loadSampleData}
                   className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                 >
-                  載入範例數據
+                  載入範例
                 </button>
               </div>
             </div>

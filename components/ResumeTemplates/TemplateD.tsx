@@ -7,7 +7,8 @@ import {
   formatDuration, 
   getInitials,
   getSkillLevelText,
-  getSkillLevelColor
+  getSkillLevelColor,
+  formatAddress
 } from '@/utils/formatter'
 
 interface TemplateDProps {
@@ -109,8 +110,8 @@ export default function TemplateD({ resumeData, settings }: TemplateDProps) {
         <div className="relative z-10">
           <div className="flex items-start justify-between">
             <div className="flex-1">
-              <h1 className="text-4xl font-bold mb-3 tracking-tight">
-                {personalInfo.firstName} {personalInfo.lastName}
+              <h1 className="text-4xl font-bold text-gray-900 mb-3">
+                {personalInfo.firstName}{personalInfo.lastName && ` ${personalInfo.lastName}`}
               </h1>
               {personalInfo.summary && (
                 <p className="text-lg opacity-90 leading-relaxed max-w-2xl">
@@ -146,12 +147,11 @@ export default function TemplateD({ resumeData, settings }: TemplateDProps) {
               <span className="text-gray-900 font-medium truncate">{formatPhone(personalInfo.phone)}</span>
             </div>
           )}
-          {(personalInfo.city || personalInfo.address) && (
+          {(personalInfo.address || personalInfo.city || personalInfo.state || personalInfo.zipCode) && (
             <div className="flex items-center space-x-2">
               <div className={`w-2 h-2 rounded-full ${colors.bg} flex-shrink-0`}></div>
               <span className="text-gray-900 font-medium truncate">
-                {personalInfo.city || personalInfo.address}
-                {personalInfo.city && personalInfo.state && `, ${personalInfo.state}`}
+                {personalInfo.address}
               </span>
             </div>
           )}

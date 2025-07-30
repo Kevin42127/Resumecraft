@@ -7,7 +7,8 @@ import {
   formatDuration, 
   getInitials,
   getSkillLevelText,
-  getSkillLevelColor
+  getSkillLevelColor,
+  formatAddress
 } from '@/utils/formatter'
 
 interface TemplateEProps {
@@ -101,8 +102,8 @@ export default function TemplateE({ resumeData, settings }: TemplateEProps) {
       <div className={`${colors.header} text-white p-8`}>
         <div className="flex items-center justify-between">
           <div className="flex-1">
-            <h1 className="text-4xl font-bold mb-3">
-              {personalInfo.firstName} {personalInfo.lastName}
+            <h1 className="text-4xl font-bold text-gray-900 mb-3">
+              {personalInfo.firstName}{personalInfo.lastName && ` ${personalInfo.lastName}`}
             </h1>
             {personalInfo.summary && (
               <p className="text-lg opacity-90 leading-relaxed max-w-3xl">
@@ -135,7 +136,7 @@ export default function TemplateE({ resumeData, settings }: TemplateEProps) {
             <tr className="border-b border-gray-200">
               <td className="py-3 px-0 font-semibold text-gray-700">Address:</td>
               <td className="py-3 px-0 text-gray-900">
-                {personalInfo.address ? `${personalInfo.address}, ${personalInfo.city} ${personalInfo.state} ${personalInfo.zipCode}` : 'N/A'}
+                {personalInfo.address || 'N/A'}
               </td>
               <td className="py-3 px-0 font-semibold text-gray-700">LinkedIn:</td>
               <td className="py-3 px-0 text-gray-900">{personalInfo.linkedin || 'N/A'}</td>

@@ -94,6 +94,17 @@ export default function FormEditor() {
           >
             重置
           </button>
+          <button
+            onClick={() => {
+              resetForm();
+              // 額外清除 localStorage
+              localStorage.removeItem('resumecraft-data');
+              alert('所有資料已清除，包括本地儲存的資料');
+            }}
+            className="px-4 py-2 text-sm bg-orange-100 text-orange-700 rounded-lg hover:bg-orange-200 transition-colors"
+          >
+            完全清除
+          </button>
         </div>
       </div>
 

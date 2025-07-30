@@ -24,7 +24,7 @@ interface HeaderProps {
 
 export default function Header({ onFeedbackClick, showPreview, onTogglePreview }: HeaderProps) {
   const { formData, updateSettings } = useResumeForm()
-  const { exportResume, isExporting, progress, error, resetExportState } = useResumeExport()
+  const { handleExportPDF, isExporting, error, clearError } = useResumeExport()
   const [showSettings, setShowSettings] = useState(false)
   const [showTemplateDropdown, setShowTemplateDropdown] = useState(false)
   const templateButtonRef = useRef<HTMLButtonElement>(null)
@@ -39,15 +39,7 @@ export default function Header({ onFeedbackClick, showPreview, onTogglePreview }
     { id: 'template-f', name: '技術模板', color: 'red' },
   ]
 
-  const handleExportPDF = async () => {
-    try {
-      await exportResume({ filename: 'resume.pdf' })
-      console.log('PDF 匯出成功！')
-    } catch (error) {
-      console.error('PDF 匯出失敗:', error)
-      // 錯誤處理已在Hook中完成
-    }
-  }
+
 
   const handleTemplateDropdownToggle = () => {
     if (templateButtonRef.current) {
@@ -128,7 +120,7 @@ export default function Header({ onFeedbackClick, showPreview, onTogglePreview }
 
           {/* Export Button */}
           <motion.button
-            onClick={handleExportPDF}
+            onClick={() => handleExportPDF({ filename: 'resume.pdf' })}
             disabled={isExporting}
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
               isExporting 
@@ -141,7 +133,7 @@ export default function Header({ onFeedbackClick, showPreview, onTogglePreview }
             {isExporting ? (
               <>
                 <div className="w-5 h-5 border-2 border-white rounded-full border-t-transparent animate-spin" />
-                <span className="hidden sm:inline">匯出中... {progress}%</span>
+                <span className="hidden sm:inline">匯出中...</span>
               </>
             ) : (
               <>
@@ -240,7 +232,7 @@ export default function Header({ onFeedbackClick, showPreview, onTogglePreview }
       {/* Export Error Modal */}
       <ExportErrorModal 
         error={error} 
-        onClose={resetExportState} 
+        onClose={clearError} 
       />
 
       {/* Template Dropdown Portal */}

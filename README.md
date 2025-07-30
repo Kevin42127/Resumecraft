@@ -83,8 +83,7 @@ npm start
 - 自訂樣式（字體、顏色、區塊順序）
 - 範例資料填充、撰寫提示、ATS 關鍵字建議
 - PDF 匯出：
-  - 後端：Puppeteer 渲染 HTML/CSS
-  - 備用：html2canvas + jsPDF
+  - QuestPDF (C# 後端) 高品質渲染
 
 ---
 
@@ -134,9 +133,8 @@ Resumecraft/
 │   ├── Header.tsx         # 頁面標題
 │   └── PreviewPanel.tsx   # 預覽面板
 ├── hooks/                 # 自訂 Hooks
-│   └── useResumeForm.ts   # 履歷表單管理
-├── lib/                   # 工具函式庫
-│   └── pdfGenerator.ts    # PDF 生成工具
+│   ├── useResumeForm.ts   # 履歷表單管理
+│   └── useResumeExport.ts # PDF 匯出管理
 ├── types/                 # TypeScript 型別定義
 │   └── resume.ts          # 履歷資料型別
 ├── utils/                 # 工具函式
@@ -145,70 +143,3 @@ Resumecraft/
 └── public/                # 靜態資源
     └── logo.svg           # 專案 Logo
 ```
-
----
-
-## 🔧 環境變數
-
-建立 `.env.local` 檔案：
-
-```env
-# Email 設定（用於意見回饋）
-EMAIL_USER=your-email@gmail.com
-EMAIL_PASS=your-app-password
-```
-
----
-
-## 📝 開發注意事項
-
-1. **TypeScript**: 所有檔案都使用 TypeScript 進行型別檢查
-2. **ESLint**: 使用 ESLint 進行程式碼品質檢查
-3. **Prettier**: 建議使用 Prettier 進行程式碼格式化
-4. **Responsive**: 所有元件都支援響應式設計
-5. **Accessibility**: 遵循 WCAG 2.1 無障礙設計準則
-
----
-
-## 🚀 部署
-
-### Vercel（推薦）
-```bash
-npm run build
-vercel --prod
-```
-
-### 其他平台
-```bash
-npm run build
-npm start
-```
-
----
-
-## 📄 授權
-
-MIT License - 詳見 [LICENSE](LICENSE) 檔案
-
----
-
-## 🤝 貢獻
-
-歡迎提交 Issue 和 Pull Request！
-
-1. Fork 專案
-2. 建立功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交變更 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 開啟 Pull Request
-
----
-
-## 📞 聯絡我們
-
-- Email: tyouxipindao@gmail.com
-- 專案連結: https://github.com/your-username/resumecraft
-
----
-
-**ResumeCraft** - 讓您的履歷更專業、更出色！

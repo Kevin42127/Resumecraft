@@ -26,6 +26,11 @@ export const formatPhone = (phone: string): string => {
   return phone;
 };
 
+export const formatAddress = (address: string, city: string, state: string, zipCode: string): string => {
+  const parts = [address, city, state, zipCode].filter(part => part && part.trim());
+  return parts.join(', ');
+};
+
 export const formatDuration = (startDate: string, endDate: string, current: boolean): string => {
   if (!startDate) return '';
   

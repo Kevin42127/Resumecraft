@@ -2,15 +2,16 @@
 
 import { useResumeForm } from '@/hooks/useResumeForm'
 import { ResumeFormProvider } from '@/hooks/useResumeForm'
-import { downloadResumeAsPDF } from '@/lib/pdfGenerator'
+import { useResumeExport } from '@/hooks/useResumeExport'
 import TemplateA from '@/components/ResumeTemplates/TemplateA'
 
 function PDFFormatTestPageContent() {
   const { formData, loadSampleData } = useResumeForm()
+  const { handleExportPDF, isExporting } = useResumeExport()
 
-  const handleExportPDF = async () => {
+  const handleExport = async () => {
     try {
-      await downloadResumeAsPDF()
+      await handleExportPDF({ filename: 'resume.pdf' })
       console.log('PDF 匯出成功！')
     } catch (error) {
       console.error('PDF 匯出失敗:', error)
@@ -33,10 +34,10 @@ function PDFFormatTestPageContent() {
                   onClick={loadSampleData}
                   className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                 >
-                  載入範例數據
+                  載入範例
                 </button>
                 <button
-                  onClick={handleExportPDF}
+                  onClick={handleExport}
                   className="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
                 >
                   匯出 PDF

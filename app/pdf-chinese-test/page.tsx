@@ -2,16 +2,17 @@
 
 import { useResumeForm } from '@/hooks/useResumeForm'
 import { ResumeFormProvider } from '@/hooks/useResumeForm'
-import { downloadResumeAsPDF } from '@/lib/pdfGenerator'
+import { useResumeExport } from '@/hooks/useResumeExport'
 import TemplateA from '@/components/ResumeTemplates/TemplateA'
 import TemplateB from '@/components/ResumeTemplates/TemplateB'
 
 function PDFChineseTestPageContent() {
   const { formData, loadSampleData } = useResumeForm()
+  const { handleExportPDF, isExporting } = useResumeExport()
 
-  const handleExportPDF = async () => {
+  const handleExport = async () => {
     try {
-      await downloadResumeAsPDF()
+      await handleExportPDF({ filename: 'resume.pdf' })
       console.log('PDF 匯出成功！')
     } catch (error) {
       console.error('PDF 匯出失敗:', error)
@@ -45,10 +46,10 @@ function PDFChineseTestPageContent() {
                   onClick={loadSampleData}
                   className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                 >
-                  載入範例數據
+                  載入範例
                 </button>
                 <button
-                  onClick={handleExportPDF}
+                  onClick={handleExport}
                   className="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
                 >
                   匯出 PDF
@@ -71,7 +72,7 @@ function PDFChineseTestPageContent() {
             <div className="bg-white p-6 rounded-lg shadow">
               <h2 className="text-xl font-semibold mb-4">改進說明</h2>
               <div className="space-y-2 text-sm text-gray-600">
-                <p>• 使用 html2canvas 確保樣式一致</p>
+                <p>• 使用 Puppeteer 確保樣式一致</p>
                 <p>• 添加中文字體支援</p>
                 <p>• 提高解析度 (scale: 2)</p>
                 <p>• 改進字體渲染</p>

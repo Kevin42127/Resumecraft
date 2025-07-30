@@ -1,0 +1,5 @@
+[33mfcebe9e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m feat: 添加PDF功能完整性測試和報告
+[33mf37783f[m feat: 切換到Vercel部署，恢復Puppeteer PDF生成 - 恢復高品質Puppeteer PDF生成功能 - 添加Vercel配置文件vercel.json - 創建Vercel部署指南 - 移除Netlify配置，改用Vercel
+[33md0d2ca5[m fix: 完全移除Puppeteer依賴，改用純前端PDF生成 - 簡化API路由，避免Netlify環境問題 - 直接使用前端PDF生成，提高穩定性 - 添加PDF測試頁面
+[33m1afbf99[m fix: 修復Netlify PDF生成超時問題 - 添加8秒超時控制 - 優化Puppeteer啟動參數 - 添加前端PDF生成作為備用方案 - 智能錯誤處理和自動切換
+[33m57a487c[m docs: 更新Netlify部署文檔 - 修正配置說明 - 更新故障排除指南 - 添加已修復問題清單

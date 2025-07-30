@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Resumecraft\\QuestPdfApi\\QuestPdfApi.csproj": {}
+    "F:\\resumecraft\\QuestPdfApi\\QuestPdfApi.csproj": {}
   },
   "projects": {
-    "F:\\Resumecraft\\QuestPdfApi\\QuestPdfApi.csproj": {
+    "F:\\resumecraft\\QuestPdfApi\\QuestPdfApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Resumecraft\\QuestPdfApi\\QuestPdfApi.csproj",
+        "projectUniqueName": "F:\\resumecraft\\QuestPdfApi\\QuestPdfApi.csproj",
         "projectName": "QuestPdfApi",
-        "projectPath": "F:\\Resumecraft\\QuestPdfApi\\QuestPdfApi.csproj",
+        "projectPath": "F:\\resumecraft\\QuestPdfApi\\QuestPdfApi.csproj",
         "packagesPath": "C:\\Users\\tyoux\\.nuget\\packages\\",
-        "outputPath": "F:\\Resumecraft\\QuestPdfApi\\obj\\",
+        "outputPath": "F:\\resumecraft\\QuestPdfApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tyoux\\AppData\\Roaming\\NuGet\\NuGet.Config"

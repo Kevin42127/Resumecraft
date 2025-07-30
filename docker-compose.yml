@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # QuestPDF API 服務
+  questpdf-api:
+    build:
+      context: ./QuestPdfApi
+      dockerfile: Dockerfile
+    ports:
+      - "5101:5101"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:5101
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5101/api/pdf/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - resumecraft-network
+
+  # Next.js 前端服務
+  resumecraft-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_QUESTPDF_API_URL=http://questpdf-api:5101
+    depends_on:
+      questpdf-api:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - resumecraft-network
+
+networks:
+  resumecraft-network:
+    driver: bridge 

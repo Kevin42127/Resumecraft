@@ -1,9 +1,7 @@
 import { useState } from 'react'
-import { generatePDFFromCanvas } from '@/lib/pdfGenerator'
 
 interface ExportOptions {
   filename?: string
-  useBackend?: boolean
 }
 
 export const useResumeExport = () => {
@@ -11,26 +9,17 @@ export const useResumeExport = () => {
   const [error, setError] = useState<string | null>(null)
 
   const handleExportPDF = async (options: ExportOptions = {}) => {
-    const { filename = 'resume.pdf', useBackend = false } = options
+    const { filename = 'resume.pdf' } = options
     
     setIsExporting(true)
     setError(null)
 
     try {
-      // 優先使用前端 PDF 生成（更穩定）
-      if (!useBackend) {
-        console.log('📄 使用前端 PDF 生成...')
-        await generateFrontendPDF(filename)
-        return
-      }
-
-      // 備用：嘗試後端 API
-      console.log('📄 嘗試後端 PDF 生成...')
-      const success = await generateBackendPDF(filename)
+      console.log('📄 使用 QuestPDF 生成...')
+      const success = await generateQuestPDF(filename)
       
       if (!success) {
-        console.log('⚠️ 後端失敗，切換到前端生成...')
-        await generateFrontendPDF(filename)
+        throw new Error('QuestPDF 生成失敗，請確保 QuestPDF API 服務正在運行')
       }
     } catch (err) {
       console.error('❌ PDF 匯出失敗:', err)
@@ -40,16 +29,7 @@ export const useResumeExport = () => {
     }
   }
 
-  const generateFrontendPDF = async (filename: string) => {
-    const element = document.getElementById('resume-preview')
-    if (!element) {
-      throw new Error('找不到履歷預覽元素')
-    }
-
-    await generatePDFFromCanvas(element, filename)
-  }
-
-  const generateBackendPDF = async (filename: string): Promise<boolean> => {
+  const generateQuestPDF = async (filename: string): Promise<boolean> => {
     try {
       const element = document.getElementById('resume-preview')
       if (!element) {
@@ -58,16 +38,46 @@ export const useResumeExport = () => {
 
       const html = element.outerHTML
       
-      const response = await fetch('/api/generate-pdf', {
+      // 使用環境變數或默認本地地址
+      const QUESTPDF_API_URL = process.env.NEXT_PUBLIC_QUESTPDF_API_URL || 'http://localhost:5101'
+      
+      // 使用 QuestPDF API
+      const response = await fetch(`${QUESTPDF_API_URL}/api/pdf/generate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ html, filename }),
+        body: JSON.stringify({ 
+          html, 
+          filename,
+          config: {
+            paperSize: 'A4',
+            orientation: 'Portrait',
+            marginTop: 20,
+            marginBottom: 20,
+            marginLeft: 20,
+            marginRight: 20,
+            enableHeader: false,
+            enableFooter: false,
+            fontFamily: 'Microsoft YaHei',
+            fontSize: 12,
+            enablePageNumbers: false,
+          },
+          styles: {
+            removeShadows: true,
+            removeRoundedCorners: true,
+            removeAnimations: true,
+            flattenBackgrounds: true,
+            convertToGrayscale: false,
+            primaryFont: 'Microsoft YaHei',
+            fallbackFont: 'Arial',
+          }
+        }),
       })
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
+        const errorText = await response.text()
+        throw new Error(`QuestPDF API 錯誤 (${response.status}): ${errorText}`)
       }
 
       const blob = await response.blob()
@@ -82,14 +92,19 @@ export const useResumeExport = () => {
 
       return true
     } catch (error) {
-      console.error('後端 PDF 生成失敗:', error)
+      console.error('QuestPDF 生成失敗:', error)
       return false
     }
+  }
+
+  const clearError = () => {
+    setError(null)
   }
 
   return {
     handleExportPDF,
     isExporting,
     error,
+    clearError,
   }
 } 

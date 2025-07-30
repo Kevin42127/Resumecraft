@@ -24,7 +24,7 @@ function SimpleTestPageContent() {
               onClick={handleLoadSample}
               className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
             >
-              載入範例 (點擊次數: {clickCount})
+              載入範例
             </button>
           </div>
 

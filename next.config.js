@@ -5,6 +5,9 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   
+  // Docker 部署支援
+  output: 'standalone',
+  
   // 圖片優化
   images: {
     domains: ['localhost'],

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QuestPdfApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9bbdb7f326bd4ebedf6386d2db2ca46cbb8d2348")]
 [assembly: System.Reflection.AssemblyProductAttribute("QuestPdfApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QuestPdfApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

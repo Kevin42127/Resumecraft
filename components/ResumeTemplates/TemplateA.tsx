@@ -7,7 +7,8 @@ import {
   formatDuration, 
   getInitials,
   getSkillLevelText,
-  getSkillLevelColor
+  getSkillLevelColor,
+  formatAddress
 } from '@/utils/formatter'
 
 interface TemplateAProps {
@@ -64,7 +65,7 @@ export default function TemplateA({ resumeData, settings }: TemplateAProps) {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              {personalInfo.firstName} {personalInfo.lastName}
+              {personalInfo.firstName}{personalInfo.lastName && ` ${personalInfo.lastName}`}
             </h1>
             {personalInfo.summary && (
               <p className="text-gray-600 leading-relaxed max-w-2xl">
@@ -102,7 +103,7 @@ export default function TemplateA({ resumeData, settings }: TemplateAProps) {
               <div className="flex items-center space-x-2">
                 <span className="text-gray-500">Address:</span>
                 <span className="text-gray-900">
-                  {personalInfo.address}, {personalInfo.city} {personalInfo.state} {personalInfo.zipCode}
+                  {personalInfo.address}
                 </span>
               </div>
             )}

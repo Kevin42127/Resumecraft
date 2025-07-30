@@ -7,7 +7,8 @@ import {
   formatDuration, 
   getInitials,
   getSkillLevelText,
-  getSkillLevelColor
+  getSkillLevelColor,
+  formatAddress
 } from '@/utils/formatter'
 
 interface TemplateBProps {
@@ -66,7 +67,7 @@ export default function TemplateB({ resumeData, settings }: TemplateBProps) {
           {/* Name and Title */}
           <div className="mb-8">
             <h1 className="text-4xl font-bold text-gray-900 mb-2">
-              {personalInfo.firstName} {personalInfo.lastName}
+              {personalInfo.firstName}{personalInfo.lastName && ` ${personalInfo.lastName}`}
             </h1>
             {personalInfo.summary && (
               <p className="text-gray-600 leading-relaxed text-lg">
@@ -163,7 +164,7 @@ export default function TemplateB({ resumeData, settings }: TemplateBProps) {
                 <div>
                   <div className="text-sm opacity-80">Address</div>
                   <div className="font-medium">
-                    {personalInfo.address}, {personalInfo.city} {personalInfo.state} {personalInfo.zipCode}
+                    {personalInfo.address}
                   </div>
                 </div>
               )}
