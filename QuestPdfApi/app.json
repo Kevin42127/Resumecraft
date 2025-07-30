@@ -1,0 +1,25 @@
+{
+  "name": "QuestPDF API",
+  "description": "QuestPDF API for ResumeCraft",
+  "repository": "https://github.com/Kevin42127/Resumecraft.git",
+  "keywords": ["dotnet", "questpdf", "api"],
+  "buildpacks": [
+    {
+      "url": "https://github.com/jincod/dotnetcore-buildpack"
+    }
+  ],
+  "env": {
+    "ASPNETCORE_ENVIRONMENT": {
+      "value": "Production"
+    },
+    "ASPNETCORE_URLS": {
+      "value": "http://0.0.0.0:$PORT"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  }
+} 

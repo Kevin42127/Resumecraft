@@ -1,0 +1,30 @@
+# 排除 QuestPDF API 目錄
+QuestPdfApi/
+
+# 排除 .NET 建置文件
+*.csproj
+*.sln
+*.dll
+*.exe
+
+# 排除部署腳本
+deploy-*.bat
+deploy-*.sh
+start-*.bat
+start-*.sh
+stop-*.bat
+stop-*.sh
+
+# 排除 Docker 文件
+docker-compose.yml
+Dockerfile*
+
+# 排除測試文件
+test-*.js
+check-*.js
+
+# 排除文檔文件（保留 README.md）
+*_DEPLOYMENT_GUIDE.md
+*_README.md
+*_REPORT.md
+*_SOLUTION.md 

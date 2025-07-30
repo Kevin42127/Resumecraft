@@ -24,8 +24,9 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-# 設置環境變數
+# 設置環境變數（Google Cloud Run 使用 PORT 環境變數）
 ENV ASPNETCORE_URLS=http://+:8080
 ENV ASPNETCORE_ENVIRONMENT=Production
+ENV PORT=8080
 
 ENTRYPOINT ["dotnet", "QuestPdfApi.dll"] 

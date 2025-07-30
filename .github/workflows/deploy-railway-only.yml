@@ -1,0 +1,52 @@
+name: Deploy QuestPDF API to Railway
+
+on:
+  push:
+    branches: [ master, main ]
+    paths:
+      - 'QuestPdfApi/**'
+      - '.github/workflows/deploy-railway-only.yml'
+  pull_request:
+    branches: [ master, main ]
+    paths:
+      - 'QuestPdfApi/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+    
+    - name: Build QuestPDF API
+      working-directory: ./QuestPdfApi
+      run: |
+        dotnet restore
+        dotnet build --configuration Release --no-restore
+        dotnet publish --configuration Release --no-build --output ./publish
+    
+    - name: Deploy to Railway
+      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+      run: |
+        curl -X POST \
+          -H "Authorization: Bearer ${{ secrets.RAILWAY_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{"service": "questpdf-api"}' \
+          https://api.railway.app/v2/deployments
+    
+    - name: Wait for deployment
+      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+      run: |
+        echo "Waiting for Railway deployment to complete..."
+        sleep 30
+    
+    - name: Check deployment status
+      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+      run: |
+        echo "Deployment completed! Check Railway dashboard for status." 
