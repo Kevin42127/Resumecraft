@@ -1,6 +1,6 @@
 # 🚀 Railway 部署快速開始
 
-## 解決 GitHub Actions 警告
+## 解決部署失敗問題
 
 ### 步驟 1：設置 Railway Token
 
@@ -38,8 +38,8 @@
    - 選擇您的 Resumecraft 倉庫
 
 2. **配置設置**
-   - **Builder**: Dockerfile
-   - **Dockerfile Path**: QuestPdfApi/Dockerfile.railway
+   - **Builder**: Nixpacks
+   - **Root Directory**: `QuestPdfApi`
    - **Start Command**: `dotnet QuestPdfApi.dll --urls http://0.0.0.0:$PORT`
 
 3. **環境變數**
@@ -53,7 +53,7 @@
 
 ```bash
 git add .
-git commit -m "Fix Docker build issues and update Railway configuration"
+git commit -m "Switch to Nixpacks builder for Railway deployment"
 git push origin master
 ```
 
@@ -62,6 +62,14 @@ git push origin master
 - 查看 GitHub Actions 執行狀態
 - 檢查 Railway Dashboard 部署進度
 - 獲得部署 URL
+
+## 故障排除
+
+如果部署仍然失敗：
+
+1. **檢查 Railway 日誌**：點擊 "View logs" 查看詳細錯誤
+2. **嘗試手動部署**：在 Railway Dashboard 中手動觸發部署
+3. **檢查環境變數**：確保所有必要的環境變數都已設置
 
 ## 完成！
 
